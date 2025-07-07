@@ -564,16 +564,18 @@ var _hmt = _hmt || [];
             const utc = now.getTime() + now.getTimezoneOffset() * 60000;
             const bjDate = new Date(utc + bjOffset * 60000);
 
-            // 格式化日期（去除前导零）
+            // 格式化日期（显示不补零，计算补零）
             const y = bjDate.getFullYear();
-            const m = bjDate.getMonth() + 1;
-            const d = bjDate.getDate();
+            const m = bjDate.getMonth() + 1; // 显示用
+            const d = bjDate.getDate();      // 显示用
+            const mm = m.toString().padStart(2, '0'); // 计算用
+            const dd = d.toString().padStart(2, '0'); // 计算用
             let html = `<p>然而、截至${y}年${m}月${d}日，王贵平家属依然没有收到本案王贵平的《刑事拘留通知书》和《逮捕通知书》，存在以下明显违法点：</p>`;
 
             timeBoardEvents.forEach((event, idx) => {
                 const eventDate = new Date(event.date + "T00:00:00+08:00");
-                // 只比较日期部分
-                const today = new Date(`${y}-${m}-${d}T00:00:00+08:00`);
+                // 只比较日期部分，计算用补零
+                const today = new Date(`${y}-${mm}-${dd}T00:00:00+08:00`);
                 const diff = Math.ceil((today - eventDate) / (1000 * 60 * 60 * 24)); // 以法定送达日为基准
                 let status = "";
                 let colorClass = "";
