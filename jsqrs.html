@@ -410,6 +410,8 @@ var _hmt = _hmt || [];
 
         <div class="section">
             <p style="text-align: right;">qrs2025_7_7</p>
+        <!-- 隐藏的补零日期基准，用于日期计算，不显示在页面和打印中 -->
+        <span id="date-calc-base" style="display:none;">2025年07月07日</span>
         </div>
 
             <div class="section">
@@ -564,18 +566,31 @@ var _hmt = _hmt || [];
             const utc = now.getTime() + now.getTimezoneOffset() * 60000;
             const bjDate = new Date(utc + bjOffset * 60000);
 
-            // 格式化日期（显示不补零，计算补零）
+            // 显示用日期（不补零）
             const y = bjDate.getFullYear();
-            const m = bjDate.getMonth() + 1; // 显示用
-            const d = bjDate.getDate();      // 显示用
-            const mm = m.toString().padStart(2, '0'); // 计算用
-            const dd = d.toString().padStart(2, '0'); // 计算用
+            const m = bjDate.getMonth() + 1;
+            const d = bjDate.getDate();
             let html = `<p>然而、截至${y}年${m}月${d}日，王贵平家属依然没有收到本案王贵平的《刑事拘留通知书》和《逮捕通知书》，存在以下明显违法点：</p>`;
+
+            // 计算用日期（优先取隐藏span，补零）
+            let calcY, calcM, calcD;
+            const calcBase = document.getElementById('date-calc-base');
+            if (calcBase && calcBase.textContent.match(/(\d{4})年(\d{2})月(\d{2})日/)) {
+                const match = calcBase.textContent.match(/(\d{4})年(\d{2})月(\d{2})日/);
+                calcY = match[1];
+                calcM = match[2];
+                calcD = match[3];
+            } else {
+                // 兜底：用当前日期补零
+                calcY = y.toString();
+                calcM = m.toString().padStart(2, '0');
+                calcD = d.toString().padStart(2, '0');
+            }
 
             timeBoardEvents.forEach((event, idx) => {
                 const eventDate = new Date(event.date + "T00:00:00+08:00");
                 // 只比较日期部分，计算用补零
-                const today = new Date(`${y}-${mm}-${dd}T00:00:00+08:00`);
+                const today = new Date(`${calcY}-${calcM}-${calcD}T00:00:00+08:00`);
                 const diff = Math.ceil((today - eventDate) / (1000 * 60 * 60 * 24)); // 以法定送达日为基准
                 let status = "";
                 let colorClass = "";
