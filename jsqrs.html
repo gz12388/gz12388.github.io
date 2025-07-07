@@ -564,10 +564,10 @@ var _hmt = _hmt || [];
             const utc = now.getTime() + now.getTimezoneOffset() * 60000;
             const bjDate = new Date(utc + bjOffset * 60000);
 
-            // 格式化日期
+            // 格式化日期（去除前导零）
             const y = bjDate.getFullYear();
-            const m = (bjDate.getMonth() + 1).toString().padStart(2, '0');
-            const d = bjDate.getDate().toString().padStart(2, '0');
+            const m = bjDate.getMonth() + 1;
+            const d = bjDate.getDate();
             let html = `<p>然而、截至${y}年${m}月${d}日，王贵平家属依然没有收到本案王贵平的《刑事拘留通知书》和《逮捕通知书》，存在以下明显违法点：</p>`;
 
             timeBoardEvents.forEach((event, idx) => {
