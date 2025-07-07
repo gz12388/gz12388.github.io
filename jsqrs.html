@@ -423,6 +423,11 @@ var _hmt = _hmt || [];
     .theme-toggle:hover {
         background-color: #0d4a9e;
     }
+    @media print {
+        .theme-toggle {
+            display: none !important;
+        }
+    }
     :root {
         --background: #f0f2f5;
         --text: #333;
