@@ -392,6 +392,34 @@ var _hmt = _hmt || [];
                 display: none !important;
             }
         }
+        /* 视频二维码与链接样式规范 */
+        .video-section {
+            margin-bottom: 30px;
+        }
+        .video-qr-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .video-qr-img {
+            width: 110px;
+            height: 110px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            background: #fff;
+            padding: 4px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .video-qr-caption {
+            font-size: 13px;
+            color: #555;
+            margin-top: 4px;
+        }
+        .video-link {
+            color: #1a5fb4;
+            text-decoration: underline;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -502,11 +530,16 @@ var _hmt = _hmt || [];
             <div class="section-title">二、关于王贵平父亲未收到刑事拘留通知书和逮捕通知书问题的确认</div>
             <div class="sub-section">
                 <p>我是王廷书，我儿子王贵平于2019年1月20日涉案，至今2025年7月7日，始终未收到《刑事拘留通知书》和《逮捕通知书》。我在此郑重声明：若有不实之处，愿承担法律责任。</p>
-                <p></p>
-                <p style="page-break-before: always;">
-                  详见视频：<a href="assets/videos/non_pub/zczl/wts.mp4" target="_blank" style="color:#1a5fb4;text-decoration:underline;">https://gz12388.github.io/assets/videos/non_pub/zczl/wts.mp4</a>
-                <br><br><br>
-                </p>
+                <div class="video-section">
+                  <div>详见视频：
+                    <a href="assets/videos/non_pub/zczl/wts.mp4" target="_blank" class="video-link">https://gz12388.github.io/assets/videos/non_pub/zczl/wts.mp4</a>
+                  </div>
+                  <div class="video-qr-container">
+                    <img src="favicon.ico/wts_qr.png" alt="王廷书视频二维码" class="video-qr-img">
+                    <div class="video-qr-caption">扫码观看王廷书视频</div>
+                  </div>
+                  <br><br><br>
+                </div>
                 <div style="text-align: right;">
                     <div style="margin-bottom: 8px;">
                         <span>陈述人：</span>
@@ -526,11 +559,16 @@ var _hmt = _hmt || [];
             <div class="section-title">三、关于王贵平母亲未收到刑事拘留通知书和逮捕通知书问题的确认</div>
             <div class="sub-section">
                 <p>我是罗顺琼，我儿子王贵平于2019年1月20日涉案，至今2025年7月7日，始终未收到《刑事拘留通知书》和《逮捕通知书》。我在此郑重声明：若有不实之处，愿承担法律责任。</p>
-                <p></p>
-                <p>
-                  详见视频：<a href="assets/videos/non_pub/zczl/lsq.mp4" target="_blank" style="color:#1a5fb4;text-decoration:underline;">https://gz12388.github.io/assets/videos/non_pub/zczl/lsq.mp4</a>
-                <br><br><br>
-                </p>
+                <div class="video-section">
+                  <div>详见视频：
+                    <a href="assets/videos/non_pub/zczl/lsq.mp4" target="_blank" class="video-link">https://gz12388.github.io/assets/videos/non_pub/zczl/lsq.mp4</a>
+                  </div>
+                  <div class="video-qr-container">
+                    <img src="favicon.ico/lsq_qr.png" alt="罗顺琼视频二维码" class="video-qr-img" />
+                    <div class="video-qr-caption">扫码观看罗顺琼视频</div>
+                  </div>
+                  <br><br><br>
+                </div>
                 <div style="text-align: right;">
                     <div style="margin-bottom: 8px;">
                         <span>陈述人：</span>
