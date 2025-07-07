@@ -346,8 +346,9 @@ var _hmt = _hmt || [];
         /* 侧边悬浮导航栏样式 */
         .side-nav {
             position: fixed;
-            top: 120px;
-            left: 0;
+            top: 50%;
+            left: calc(50vw - 400px - 72px); /* 800px内容区左边缘，72px为导航宽度+间距 */
+            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -402,8 +403,73 @@ var _hmt = _hmt || [];
 
     <!-- 打印按钮 - 仅屏幕显示 -->
     <button class="print-button" onclick="window.print()">打印</button>
-    <!-- 返回主页按钮 - 仅屏幕显示 -->
-    <button class="home-button" onclick="window.location.href='index.html'">返回主页</button>
+    <!-- 主题切换按钮 - 水平对称显示 -->
+    <button class="theme-toggle" id="theme-toggle" title="切换昼夜模式">☀️</button>
+    <style>
+    .theme-toggle {
+        position: fixed;
+        top: 60px;
+        left: 20px;
+        background-color: #1a5fb4;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        z-index: 1000;
+        transition: background 0.2s;
+    }
+    .theme-toggle:hover {
+        background-color: #0d4a9e;
+    }
+    :root {
+        --background: #f0f2f5;
+        --text: #333;
+        --foreground: #fff;
+        --primary: #1a5fb4;
+        --button-hover: #0d4a9e;
+        --icon-hover: #eaf2fb;
+        --border-radius: 8px;
+    }
+    body.night {
+        --background: #23272e;
+        --text: #e0e0e0;
+        --foreground: #23272e;
+        --primary: #f7c873;
+        --button-hover: #e2a23a;
+        --icon-hover: #2d3642;
+    }
+    body.night {
+        background-color: var(--background) !important;
+        color: var(--text) !important;
+    }
+    body.night .content {
+        background: #23272e !important;
+        color: #e0e0e0 !important;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+    body.night .side-nav {
+        background: #23272e !important;
+        color: #e0e0e0 !important;
+        box-shadow: 1px 2px 8px rgba(0,0,0,0.18);
+    }
+    body.night .side-nav .nav-btn {
+        color: #f7c873 !important;
+    }
+    body.night .side-nav .nav-btn:hover {
+        background: #2d3642 !important;
+        color: #fff !important;
+    }
+    body.night .print-button, body.night .theme-toggle {
+        background: #f7c873 !important;
+        color: #23272e !important;
+    }
+    body.night .print-button:hover, body.night .theme-toggle:hover {
+        background: #e2a23a !important;
+        color: #23272e !important;
+    }
+    </style>
     <!-- 主体内容区 -->
     <div class="content">
         <h1 class="document-title" id="contentTitle">家属确认书</h1>
@@ -503,6 +569,31 @@ var _hmt = _hmt || [];
     </div>
 
     <nav class="side-nav" id="nav">
+    <script>
+    // 主题切换功能
+    (function() {
+      const btn = document.getElementById('theme-toggle');
+      function setTheme(night) {
+        if (night) {
+          document.body.classList.add('night');
+          btn.textContent = '🌙';
+        } else {
+          document.body.classList.remove('night');
+          btn.textContent = '☀️';
+        }
+        localStorage.setItem('theme', night ? 'night' : 'day');
+      }
+      btn.onclick = function() {
+        setTheme(!document.body.classList.contains('night'));
+      };
+      // 初始化
+      if (localStorage.getItem('theme') === 'night') {
+        setTheme(true);
+      } else {
+        setTheme(false);
+      }
+    })();
+    </script>
       <a href="Navigation.html" class="nav-btn">导航</a>
       <a href="index.html" class="nav-btn">主页</a>
       <a href="jsqrs.html" class="nav-btn">确认书</a>
