@@ -96,6 +96,41 @@ var _hmt = _hmt || [];
     @media (max-width: 700px) {
       .tree-container { padding: 12px 2px 10px 2px; }
     }
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      min-width: 120px;
+      background: var(--foreground);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-radius: var(--border-radius);
+      z-index: 1001;
+      padding: 6px 0;
+    }
+    .nav-dropdown-item {
+      display: block;
+      padding: 8px 18px;
+      color: var(--primary);
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 15px;
+      border-radius: 0;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover {
+      background: var(--icon-hover);
+      color: var(--button-hover);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -105,9 +140,32 @@ var _hmt = _hmt || [];
       <div class="breadcrumb">你所在的位置：<span id="breadcrumb">网站导航</span></div>
     </div>
     <nav class="header-nav" id="nav">
-      <a href="Navigation.html" class="nav-btn active">导航</a>
       <a href="index.html" class="nav-btn">主页</a>
-      <a href="jsqrs.html" class="nav-btn">确认书</a>
+      <a href="Navigation.html" class="nav-btn">导航</a>
+      <div class="nav-dropdown">
+        <a href="zcdw.html" class="nav-btn nav-dropdown-toggle">侦查单位专栏</a>
+        <div class="nav-dropdown-menu">
+          <a href="jsqrs.html" class="nav-btn nav-dropdown-item">确认书</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="jcdw.html" class="nav-btn nav-dropdown-toggle">检查单位专栏</a>
+        <div class="nav-dropdown-menu">
+          <a href="#" class="nav-btn nav-dropdown-item">材料1</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="ys.html" class="nav-btn nav-dropdown-toggle">一审专栏</a>
+        <div class="nav-dropdown-menu">
+          <a href="#" class="nav-btn nav-dropdown-item">材料1</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="es.html" class="nav-btn nav-dropdown-toggle">二审专栏</a>
+        <div class="nav-dropdown-menu">
+          <a href="#" class="nav-btn nav-dropdown-item">材料1</a>
+        </div>
+      </div>
       <a href="about.html" class="nav-btn">关于</a>
       <a href="contact.html" class="nav-btn">联系</a>
     </nav>
@@ -209,5 +267,29 @@ var _hmt = _hmt || [];
     }
     document.getElementById('file-tree').appendChild(renderTree(treeData));
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach(function(dropdown) {
+    dropdown.addEventListener('mouseleave', function() {
+      dropdown.querySelector('.nav-dropdown-menu').style.display = 'none';
+    });
+    dropdown.addEventListener('mouseenter', function() {
+      dropdown.querySelector('.nav-dropdown-menu').style.display = 'block';
+    });
+    var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var menu = dropdown.querySelector('.nav-dropdown-menu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    });
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.querySelector('.nav-dropdown-menu').style.display = 'none';
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
