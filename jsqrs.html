@@ -295,8 +295,9 @@ var _hmt = _hmt || [];
             .print-qrcode-container {
                 display: flex !important;
                 position: fixed !important;
-                right: 2.2cm !important;
-                bottom: -0.8cm !important; /* 负值让二维码紧贴页脚下方 */
+                right: 0cm !important;
+                bottom: -0.8cm !important;
+                margin: 0 !important;
                 z-index: 9999 !important;
                 width: auto !important;
                 height: auto !important;
@@ -304,7 +305,7 @@ var _hmt = _hmt || [];
                 background: none !important;
                 box-shadow: none !important;
                 justify-content: flex-end !important;
-                align-items: flex-start !important;
+                align-items: flex-end !important;
             }
             .print-qrcode-img {
                 width: 48px !important;
