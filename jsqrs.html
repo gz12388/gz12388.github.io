@@ -886,6 +886,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
             setupPrintStyles(title, path);
 
+            // 主题切换功能
+            var themeToggleBtn = document.getElementById('theme-toggle');
+            function updateThemeIcon() {
+                // 白天显示月亮，夜间显示太阳
+                themeToggleBtn.textContent = document.body.classList.contains('night') ? '\u2600\ufe0f' : '\uD83C\uDF19';
+            }
+            themeToggleBtn.onclick = function() {
+                document.body.classList.toggle('night');
+                updateThemeIcon();
+            };
+            updateThemeIcon();
+
             console.log('二维码容器已初始化');
         }
 
