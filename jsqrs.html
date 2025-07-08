@@ -347,7 +347,7 @@ var _hmt = _hmt || [];
         .side-nav {
             position: fixed;
             top: 50%;
-            left: calc(50vw - 400px - 93px); /* 800px内容区左边缘，93px为导航宽度+间距，略微左移 */
+            left: calc(50vw - 400px - 200px); /* 800px内容区左边缘，200px为导航宽度+间距，略微左移 */
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
@@ -619,38 +619,104 @@ var _hmt = _hmt || [];
     </div>
 
     <nav class="side-nav" id="nav">
-    <script>
-    // 主题切换功能
-    (function() {
-      const btn = document.getElementById('theme-toggle');
-      function setTheme(night) {
-        if (night) {
-          document.body.classList.add('night');
-          btn.textContent = '☀️'; // 夜间显示太阳，表示可切回白天
-        } else {
-          document.body.classList.remove('night');
-          btn.textContent = '🌙'; // 白天显示月亮，表示可切换到夜间
-        }
-        localStorage.setItem('theme', night ? 'night' : 'day');
-      }
-      btn.onclick = function() {
-        setTheme(!document.body.classList.contains('night'));
-      };
-      // 初始化
-      if (localStorage.getItem('theme') === 'night') {
-        setTheme(true);
-      } else {
-        setTheme(false);
-      }
-    })();
-    </script>
-      <a href="Navigation.html" class="nav-btn">导航</a>
       <a href="index.html" class="nav-btn">主页</a>
-      <a href="jsqrs.html" class="nav-btn">确认书</a>
+      <a href="Navigation.html" class="nav-btn">导航</a>
+      <div class="side-dropdown">
+        <a href="zcdw.html" class="nav-btn side-dropdown-toggle">侦查单位专栏</a>
+        <div class="side-dropdown-menu">
+          <a href="jsqrs.html" class="nav-btn side-dropdown-item">确认书</a>
+        </div>
+      </div>
+      <div class="side-dropdown">
+        <a href="jcdw.html" class="nav-btn side-dropdown-toggle">检查单位专栏</a>
+        <div class="side-dropdown-menu">
+          <a href="#" class="nav-btn side-dropdown-item">材料1</a>
+        </div>
+      </div>
+      <div class="side-dropdown">
+        <a href="ys.html" class="nav-btn side-dropdown-toggle">一审专栏</a>
+        <div class="side-dropdown-menu">
+          <a href="#" class="nav-btn side-dropdown-item">材料1</a>
+        </div>
+      </div>
+      <div class="side-dropdown">
+        <a href="es.html" class="nav-btn side-dropdown-toggle">二审专栏</a>
+        <div class="side-dropdown-menu">
+          <a href="#" class="nav-btn side-dropdown-item">材料1</a>
+        </div>
+      </div>
       <a href="about.html" class="nav-btn">关于</a>
       <a href="contact.html" class="nav-btn">联系</a>
     </nav>
-
+<style>
+.side-dropdown { position: relative; }
+.side-dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 110px;
+  background: #fff;
+  box-shadow: 1px 2px 8px rgba(0,0,0,0.08);
+  border-radius: 4px;
+  z-index: 1300;
+  padding: 4px 0;
+}
+.side-dropdown-item {
+  display: block;
+  padding: 6px 18px 6px 10px;
+  color: #1a5fb4;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  border-radius: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.side-dropdown-item:hover {
+  background: #eaf2fb;
+  color: #0d4a9e;
+}
+.side-dropdown:hover .side-dropdown-menu,
+.side-dropdown:focus-within .side-dropdown-menu {
+  display: block;
+}
+@media (max-width: 600px) {
+  .side-dropdown-menu {
+    left: 90%;
+    min-width: 90px;
+  }
+  .side-dropdown-item {
+    font-size: 13px;
+    padding: 4px 10px 4px 6px;
+  }
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var dropdowns = document.querySelectorAll('.side-dropdown');
+  dropdowns.forEach(function(dropdown) {
+    dropdown.addEventListener('mouseleave', function() {
+      dropdown.querySelector('.side-dropdown-menu').style.display = 'none';
+    });
+    dropdown.addEventListener('mouseenter', function() {
+      dropdown.querySelector('.side-dropdown-menu').style.display = 'block';
+    });
+    var toggle = dropdown.querySelector('.side-dropdown-toggle');
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var menu = dropdown.querySelector('.side-dropdown-menu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    });
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.querySelector('.side-dropdown-menu').style.display = 'none';
+      }
+    });
+  });
+});
+</script>
     <script>
         // 更新时间戳
         function updateTimestamp() {
