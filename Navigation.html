@@ -289,24 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-  (function() {
-    var themeToggleBtn = document.getElementById('theme-toggle');
-    if (!themeToggleBtn) return;
-    function updateThemeIcon() {
-      // 白天显示月亮，夜间显示太阳
-      themeToggleBtn.textContent = document.body.classList.contains('night') ? '\u2600\ufe0f' : '\uD83C\uDF19';
-    }
-    updateThemeIcon();
-    var oldOnClick = themeToggleBtn.onclick;
-    themeToggleBtn.onclick = function(e) {
-      if (oldOnClick) oldOnClick.call(this, e);
-      // 切换主题
-      document.body.classList.toggle('night');
-      updateThemeIcon();
-    };
-    var observer = new MutationObserver(updateThemeIcon);
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  })();
 });
 </script>
 </body>
