@@ -187,11 +187,11 @@ var _hmt = _hmt || [];
     // 文件树数据
     const treeData = [
       // ...已删除 favicon.ico ...
-      { name: 'jsqrs.html', type: 'file', link: 'jsqrs.html' },
-      { name: 'about.html', type: 'file', link: 'about.html' },
-      { name: 'contact.html', type: 'file', link: 'contact.html' },
-      { name: 'index.html', type: 'file', link: 'index.html' },
-      { name: 'Navigation.html', type: 'file', link: 'Navigation.html' },
+      { name: '主页', type: 'file', link: 'index.html' },
+      { name: '导航', type: 'file', link: 'Navigation.html' },
+      { name: '确认书', type: 'file', link: 'jsqrs.html' },
+      { name: '关于', type: 'file', link: 'about.html' },
+      { name: '联系', type: 'file', link: 'contact.html' },
       // ...已删除 README.md ...
       // ...已删除 robots ...
       { name: '正卷1_打码公开版', type: 'folder', children: [
@@ -267,6 +267,8 @@ var _hmt = _hmt || [];
     };
     // 文件类型判断
     function getFileIcon(name) {
+      // 前五项为主页、导航、确认书、关于、联系，均显示 web 图标
+      if (["主页","导航","确认书","关于","联系"].includes(name)) return icons.web;
       const ext = name.split('.').pop().toLowerCase();
       if (["png","jpg","jpeg","gif","bmp","svg","webp"].includes(ext)) return icons.image;
       if (["html","md","js","css","json","ts","jsx","tsx"].includes(ext)) return icons.web;
